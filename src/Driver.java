@@ -19,8 +19,10 @@ public class Driver {
         System.out.println(StreamUtils.capitalized(names));
 
         System.out.println(StreamUtils.longest(names, false));
+        System.out.println(StreamUtils.longest(Collections.singletonList("What"), false));
 
         System.out.println(StreamUtils.least(people, true));
+        System.out.println(StreamUtils.least(Collections.singletonList("What"), true));
 
         System.out.println(StreamUtils.flatten(dict));
         System.out.println(StreamUtils.flatten(ppl));

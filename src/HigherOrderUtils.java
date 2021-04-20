@@ -6,6 +6,57 @@ public class HigherOrderUtils {
         String name();
     }
 
+    public static NamedBiFunction<Double, Double, Double> add = new NamedBiFunction<Double, Double, Double>() {
+        @Override
+        public String name() {
+            return "add";
+        }
+
+        @Override
+        public Double apply(Double num1, Double num2) {
+            return num1 + num2;
+        }
+    };
+
+    public static NamedBiFunction<Double, Double, Double> subtract = new NamedBiFunction<Double, Double, Double>() {
+        @Override
+        public String name() {
+            return "diff";
+        }
+
+        @Override
+        public Double apply(Double num1, Double num2) {
+            return num1 - num2;
+        }
+    };
+
+    public static NamedBiFunction<Double, Double, Double> multiply = new NamedBiFunction<Double, Double, Double>() {
+        @Override
+        public String name() {
+            return "mult";
+        }
+
+        @Override
+        public Double apply(Double num1, Double num2) {
+            return num1 * num2;
+        }
+    };
+
+    public static NamedBiFunction<Double, Double, Double> divide = new NamedBiFunction<Double, Double, Double>() {
+        @Override
+        public String name() {
+            return "div";
+        }
+
+        @Override
+        public Double apply(Double num1, Double num2) {
+            if (num2 == 0)
+                throw new ArithmeticException();
+
+            return num1 / num2;
+        }
+    };
+
     /**
      * Applies a given list of bifunctions -- functions that take two arguments of a certain type
      * and produce a single instance of that type -- to a list of arguments of that type. The
