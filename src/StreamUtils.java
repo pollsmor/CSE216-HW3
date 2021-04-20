@@ -9,7 +9,7 @@ public class StreamUtils {
      */
     public static Collection<String> capitalized(Collection<String> strings) {
         return strings.stream()
-                .filter(n -> n.length() > 0 && Character.isUpperCase(n.charAt(0)))
+                .filter(n -> n != null && n.length() > 0 && Character.isUpperCase(n.charAt(0)))
                 .collect(Collectors.toList());
     }
 
@@ -26,6 +26,8 @@ public class StreamUtils {
     public static String longest(Collection<String> strings, boolean from_start) {
         return strings.stream()
                 .reduce((str1, str2) -> {
+                    if (str2 == null) return str1;
+
                     if (from_start) {
                         return str1.length() >= str2.length() ? str1 : str2;
                     } else {
@@ -49,6 +51,8 @@ public class StreamUtils {
     public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
         return items.stream()
                 .reduce((T e1, T e2) -> {
+                    if (e2 == null) return e1;
+
                     if (from_start) {
                         return e1.compareTo(e2) <= 0 ? e1 : e2;
                     } else {
@@ -69,6 +73,9 @@ public class StreamUtils {
      * @return      the flattened list representation of <code>aMap</code>.
      */
     public static <K, V> List<String> flatten(Map<K, V> aMap) {
-        return null;
+        return aMap.entrySet()
+                .stream()
+                .map(s -> s.getKey() + " -> " + s.getValue())
+                .collect(Collectors.toList());
     }
 }
