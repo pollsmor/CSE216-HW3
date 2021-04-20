@@ -1,6 +1,5 @@
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreamUtils {
     /**
@@ -9,7 +8,9 @@ public class StreamUtils {
                         that start with a capital letter.
      */
     public static Collection<String> capitalized(Collection<String> strings) {
-        return strings;
+        return strings.stream()
+                .filter(n -> n.length() > 0 && Character.isUpperCase(n.charAt(0)))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -23,7 +24,15 @@ public class StreamUtils {
      *                      where ties are broken based on <code>from_start</code>.
      */
     public static String longest(Collection<String> strings, boolean from_start) {
-        return "";
+        return strings.stream()
+                .reduce((str1, str2) -> {
+                    if (from_start) {
+                        return str1.length() >= str2.length() ? str1 : str2;
+                    } else {
+                        return str2.length() >= str1.length() ? str2 : str1;
+                    }
+                })
+                .orElse(null);
     }
 
     /**
