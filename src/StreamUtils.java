@@ -47,7 +47,15 @@ public class StreamUtils {
      *                      broken based on <code>from_start</code>.
      */
     public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
-        return null;
+        return items.stream()
+                .reduce((T e1, T e2) -> {
+                    if (from_start) {
+                        return e1.compareTo(e2) <= 0 ? e1 : e2;
+                    } else {
+                        return e2.compareTo(e1) <= 0 ? e2 : e1;
+                    }
+                })
+                .orElse(null);
     }
 
     /**
