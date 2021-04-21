@@ -35,6 +35,7 @@ public class Driver {
                 Arrays.asList(HigherOrderUtils.add, HigherOrderUtils.multiply,
                 HigherOrderUtils.add, HigherOrderUtils.divide);
         System.out.println(HigherOrderUtils.zip(zipArgs, zipFunctions));
+        System.out.println(HigherOrderUtils.zip(new ArrayList<Double>(), new ArrayList<HigherOrderUtils.NamedBiFunction<Double, Double, Double>>()));
         System.out.println("Updated zipArgs: " + zipArgs);
 
         // Lowercase - do not try with anything other than a lowercase letter

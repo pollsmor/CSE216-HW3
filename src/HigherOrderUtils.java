@@ -79,7 +79,7 @@ public class HigherOrderUtils {
      *                      result of all the bifunctions being applied in sequence.
      */
     public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
-        if (args.size() <= bifunctions.size())
+        if (args.size() <= bifunctions.size() && !(args.size() == 0 && bifunctions.size() == 0))
             throw new IllegalArgumentException();
 
         return IntStream.range(0, args.size())
