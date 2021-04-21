@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.*;
 
 public class Driver {
     public static void main(String[] args) {
@@ -35,6 +36,18 @@ public class Driver {
                 HigherOrderUtils.add, HigherOrderUtils.divide);
         System.out.println(HigherOrderUtils.zip(zipArgs, zipFunctions));
         System.out.println("Updated zipArgs: " + zipArgs);
+
+        // Lowercase - do not try with anything other than a lowercase letter
+        Function<Character, String> concatenateChar = e -> {
+            String output = "";
+            for (int i = 0; i <= (int) e - (int) 'a'; i++) output += e;
+            return output;
+        };
+
+        Function<String, Integer> lengthOfStr = String::length;
+
+        HigherOrderUtils.FunctionComposition<Character, String, Integer> comp = new HigherOrderUtils.FunctionComposition<>();
+        System.out.println(comp.composition.apply(concatenateChar, lengthOfStr).apply('z'));
     }
 
     // Used for least method testing

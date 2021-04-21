@@ -1,6 +1,6 @@
 import java.util.*;
 import java.util.stream.*;
-import java.util.function.BiFunction;
+import java.util.function.*;
 
 public class HigherOrderUtils {
     public static interface NamedBiFunction<T, U, R> extends BiFunction<T, U, R> {
@@ -94,6 +94,6 @@ public class HigherOrderUtils {
     }
 
     public static class FunctionComposition<T, U, R> {
-
+        public BiFunction<Function<T, U>, Function<U, R>, Function<T, R>> composition = Function::andThen;
     }
 }
