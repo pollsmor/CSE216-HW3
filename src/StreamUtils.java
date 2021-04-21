@@ -34,7 +34,7 @@ public class StreamUtils {
                         return str2.length() >= str1.length() ? str2 : str1;
                     }
                 })
-                .orElse(null);
+                .orElse("N/A");
     }
 
     /**

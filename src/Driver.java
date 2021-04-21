@@ -26,6 +26,15 @@ public class Driver {
 
         System.out.println(StreamUtils.flatten(dict));
         System.out.println(StreamUtils.flatten(ppl));
+
+        // Part 2 testing ==============================================================================================
+        System.out.println("==============================================================================================");
+        List<Double> zipArgs = Arrays.asList(1.0, 1.0, 3.0, 0.0, 4.0);
+        List<HigherOrderUtils.NamedBiFunction<Double, Double, Double>> zipFunctions =
+                Arrays.asList(HigherOrderUtils.add, HigherOrderUtils.multiply,
+                HigherOrderUtils.add, HigherOrderUtils.divide);
+        System.out.println(HigherOrderUtils.zip(zipArgs, zipFunctions));
+        System.out.println("Updated zipArgs: " + zipArgs);
     }
 
     // Used for least method testing

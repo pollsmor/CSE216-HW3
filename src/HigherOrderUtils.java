@@ -1,4 +1,5 @@
-import java.util.List;
+import java.util.*;
+import java.util.stream.*;
 import java.util.function.BiFunction;
 
 public class HigherOrderUtils {
@@ -53,7 +54,7 @@ public class HigherOrderUtils {
             if (num2 == 0)
                 throw new ArithmeticException();
 
-            return num1 / num2;
+            return (double) (int) (num1 / num2);    // Truncates then converts back to a double
         }
     };
 
@@ -78,7 +79,18 @@ public class HigherOrderUtils {
      *                      result of all the bifunctions being applied in sequence.
      */
     public static <T> T zip(List<T> args, List<NamedBiFunction<T, T, T>> bifunctions) {
-        return null;
+        if (args.size() <= bifunctions.size())
+            throw new IllegalArgumentException();
+
+        return IntStream.range(0, args.size())
+                .mapToObj(i -> {
+                    if (i >= bifunctions.size()) return args.get(i); // Return element in list as is
+
+                    args.set(i + 1, bifunctions.get(i).apply(args.get(i), args.get(i + 1)));
+                    return args.get(i);
+                })
+                .reduce((e1, e2) -> e2) // Get last element
+                .orElse(null);
     }
 
     public static class FunctionComposition<T, U, R> {
